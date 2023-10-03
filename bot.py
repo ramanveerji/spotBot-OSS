@@ -53,36 +53,25 @@ async def download_flac(message):
         print("is track")
         realSong = songLink.replace("/flac", "")
         await bot.reply_to(message, "Fetching song...")
-        DownloadSong = "bash magic.sh '{}' -f -t".format(realSong)
-        os.system(DownloadSong)
-        f = open("link.txt", "r")
-        text = f.read()
-        await bot.send_message(chat_id, text)
-        cleansong = "rm -rf link.txt"
-        os.system(cleansong)
+        DownloadSong = f"bash magic.sh '{realSong}' -f -t"
     elif str.find("album")!=-1 or str.find("playlist")!=-1:
         print("is album or playlist")
         realSong = songLink.replace("/flac", "")
         await bot.reply_to(message, "Fetching album / playlist. This will take a while.")
-        DownloadSong = "bash magic.sh '{}' -f -a".format(realSong)
-        os.system(DownloadSong)
-        f = open("link.txt", "r")
-        text = f.read()
-        await bot.send_message(chat_id, text)
-        cleansong = "rm -rf link.txt"
-        os.system(cleansong)
+        DownloadSong = f"bash magic.sh '{realSong}' -f -a"
     else:
         print("is maybe query")
         realSong = songLink.replace("/flac", "")
-        tryQuery = "Trying to search for '{}' on Spotify...".format(realSong)
+        tryQuery = f"Trying to search for '{realSong}' on Spotify..."
         await bot.reply_to(message, tryQuery)
-        DownloadSong = "bash magic.sh '{}' -f -t".format(realSong)
-        os.system(DownloadSong)
-        f = open("link.txt", "r")
-        text = f.read()
-        await bot.send_message(chat_id, text)
-        cleansong = "rm -rf link.txt"
-        os.system(cleansong)
+        DownloadSong = f"bash magic.sh '{realSong}' -f -t"
+
+    os.system(DownloadSong)
+    f = open("link.txt", "r")
+    text = f.read()
+    await bot.send_message(chat_id, text)
+    cleansong = "rm -rf link.txt"
+    os.system(cleansong)
 
 @bot.message_handler(commands=['mp3'])
 async def download_mp3(message):
@@ -93,36 +82,25 @@ async def download_mp3(message):
         print("is track")
         realSong = songLink.replace("/mp3", "")
         await bot.reply_to(message, "Fetching song...")
-        DownloadSong = "bash magic.sh '{}' -m -t".format(realSong)
-        os.system(DownloadSong)
-        f = open("link.txt", "r")
-        text = f.read()
-        await bot.send_message(chat_id, text)
-        cleansong = "rm -rf link.txt"
-        os.system(cleansong)
+        DownloadSong = f"bash magic.sh '{realSong}' -m -t"
     elif str.find("album")!=-1 or str.find("playlist")!=-1:
         print("is album or playlist")
         realSong = songLink.replace("/mp3", "")
         await bot.reply_to(message, "Fetching album / playlist. This will take a while.")
-        DownloadSong = "bash magic.sh '{}' -m -a".format(realSong)
-        os.system(DownloadSong)
-        f = open("link.txt", "r")
-        text = f.read()
-        await bot.send_message(chat_id, text)
-        cleansong = "rm -rf link.txt"
-        os.system(cleansong)
+        DownloadSong = f"bash magic.sh '{realSong}' -m -a"
     else:
         print("is maybe query")
         realSong = songLink.replace("/mp3", "")
-        tryQuery = "Trying to search for '{}' on Spotify...".format(realSong)
+        tryQuery = f"Trying to search for '{realSong}' on Spotify..."
         await bot.reply_to(message, tryQuery)
-        DownloadSong = "bash magic.sh '{}' -m -t".format(realSong)
-        os.system(DownloadSong)
-        f = open("link.txt", "r")
-        text = f.read()
-        await bot.send_message(chat_id, text)
-        cleansong = "rm -rf link.txt"
-        os.system(cleansong)
+        DownloadSong = f"bash magic.sh '{realSong}' -m -t"
+
+    os.system(DownloadSong)
+    f = open("link.txt", "r")
+    text = f.read()
+    await bot.send_message(chat_id, text)
+    cleansong = "rm -rf link.txt"
+    os.system(cleansong)
 
 @bot.message_handler(commands=['sc'])
 async def download_soundcloud(message):
@@ -131,7 +109,7 @@ async def download_soundcloud(message):
     realSong = songLink.replace("/sc", "")
     print("attempt to download track from soundcloud")
     await bot.reply_to(message, "Fetching song from link...")
-    DownloadSong = "bash magic.sh {} -sc -x".format(realSong)
+    DownloadSong = f"bash magic.sh {realSong} -sc -x"
     os.system(DownloadSong)
     f = open("link.txt", "r")
     text = f.read()
